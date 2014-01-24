@@ -10,6 +10,21 @@
 
 @implementation BNRItem
 
+- (id)initWithItemName:(NSString *)name serialNumber:(NSString *)sNumber
+{
+    self = [super init];
+    
+    if (self)
+    {
+        [self setItemName:name];
+        [self setSerialNumber:sNumber];
+        [self setValueInDollars:0];
+        dateCreated = [[NSDate alloc] init];
+    }
+    
+    return self;
+}
+
 - (id)initWithItemName:(NSString *)name valueInDollars:(int)value serialNumber:(NSString *) sNumber
 {
     self = [super init];
@@ -23,6 +38,11 @@
     }
     
     return self;
+}
+
+- (NSString *) description
+{
+    return [NSString stringWithFormat:@"%@ $%d %@", [self itemName], [self valueInDollars], [self serialNumber]];
 }
 
 - (NSString *) itemName
@@ -86,6 +106,8 @@
     BNRItem *newItem = [[self alloc] initWithItemName:randomName
                                        valueInDollars:randomValue
                                          serialNumber:randomSerialNumber];
+    //BNRItem *newItem = [[self alloc] initWithItemName:randomName
+    //                                     serialNumber:randomSerialNumber];
     
     return newItem;
 }
